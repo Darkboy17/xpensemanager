@@ -1,0 +1,29 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+     X-Pense Manager
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+<ion-content padding>
+    <h2>Settings</h2> 
+    <form [formGroup]="addSongForm" (submit)="addSong()" novalidate>
+        <ion-item>
+            <ion-label stacked>Category Name</ion-label>
+            <ion-input formControlName="songName" type="text" 
+                placeholder="What's the new category name?"
+                [class.invalid]="!addSongForm.controls.songName.valid && addSongForm.controls.songName.dirty">
+            </ion-input>
+            </ion-item>
+            <ion-item class="error-message" 
+            *ngIf="!addSongForm.controls.songName.valid && addSongForm.controls.songName.dirty">
+            <p>
+                The Category name is required to be atleast 2 characters long.
+            </p>
+        </ion-item>
+        
+        <button ion-button block type="submit" [disabled]="!addSongForm.valid">
+            Add Song
+        </button>
+    </form>  
+</ion-content>

@@ -1,0 +1,59 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+     X-Pense Manager
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h2>Settings</h2> 
+<form [formGroup]="settingForm" (submit)="saveSettings(categ_name, unit_name, quant_sett)" (change)="toggleSave()" novalidate>
+      <ion-item>
+            <ion-label stacked>Category Name</ion-label>
+            <ion-input formControlName="categName" #categName [(ngModel)]="categ_name" type="text" 
+                placeholder="What's the new Category name?"
+                [class.invalid]="!settingForm.controls.categName.valid && settingForm.controls.categName.dirty">
+            </ion-input>
+            </ion-item>
+            <ion-item class="error-message" 
+            *ngIf="!settingForm.controls.categName.valid && settingForm.controls.categName.dirty">
+            <p text-wrap>
+                The Category name is required to be atleast 2 characters long.
+            </p>
+        </ion-item>
+
+        <ion-item>
+            <ion-label stacked>Unit Name</ion-label>
+            <ion-input formControlName="unitName" #unitName [(ngModel)]="unit_name" type="text" 
+                placeholder="What's the new Unit Name??"
+                [class.invalid]="!settingForm.controls.unitName.valid && settingForm.controls.unitName.dirty">
+            </ion-input>
+        </ion-item>
+            <ion-item class="error-message" 
+            *ngIf="!settingForm.controls.unitName.valid && settingForm.controls.unitName.dirty">
+            <p>
+                The Unit name is required to be atleast 2 characters long.
+            </p>
+        </ion-item>
+        <ion-item>
+            <ion-label stacked>Quantity range</ion-label>
+            <ion-input formControlName="qtyRng" #qtyRng  [(ngModel)]="quant_sett" type="number" 
+                placeholder="What's the maximun range you want?"
+                [class.invalid]="!settingForm.controls.qtyRng.valid && settingForm.controls.qtyRng.dirty">
+            </ion-input>
+        </ion-item>
+            <ion-item class="error-message" 
+            *ngIf="!settingForm.controls.qtyRng.valid && settingForm.controls.qtyRng.dirty">
+            <p text-wrap>
+                The range is required to be between 1 and 500 in number.
+            </p>
+        </ion-item>
+      
+        
+        <button ion-button block type="submit" [disabled]="!isenabled">
+            Save Settings
+        </button>
+  </form>
+  
+</ion-content>

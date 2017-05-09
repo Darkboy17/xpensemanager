@@ -1,0 +1,56 @@
+<ion-header>
+  <ion-navbar hideBackButton class="bar-dark">
+    <ion-title>X-Pense Manager</ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only (click)="logOutdialog()">
+        <ion-icon name="log-out"></ion-icon>Logout
+        </button>
+    </ion-buttons>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-refresher (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content pullingIcon="arrow-dropdown"
+      pullingText="Pull to Refresh List or Load more Items"
+      refreshingSpinner="circles"
+      refreshingText="Please Wait..."></ion-refresher-content>
+  </ion-refresher>
+  <strong *ngFor="let usrnm of username" style="color:darkblue">Welcome, <i style="color:coral;font-size:large">{{usrnm.name}}</i></strong>
+  <h2 style="color: cornflowerblue">Items Purchased</h2>
+  <ion-list>
+  <ion-item>
+    <ion-label>Filter By Category</ion-label>
+    <ion-select #color [(ngModel)]="selectedCat" (ionChange)="pickCateg(selectedCat,selectedMonth)">
+      <ion-option value="All">All</ion-option>
+      <ion-option *ngFor="let categ of category" value="{{categ}}">{{categ}}</ion-option>
+    </ion-select>
+  </ion-item>
+</ion-list>
+
+<ion-list>
+  <ion-item>
+    <ion-label>Filter By Month</ion-label>
+    <ion-select #color [(ngModel)]="selectedMonth" (ionChange)="pickMonth(selectedMonth,selectedCat)">     
+      <ion-option *ngFor="let month of months" value="{{month}}">{{month}}</ion-option>
+    </ion-select>
+  </ion-item>
+</ion-list>
+
+<ion-list>
+  <ion-item-sliding *ngFor="let item of itemsLists">
+    <ion-item>
+      <ion-thumbnail item-left>
+      <img src="x.png">
+    </ion-thumbnail>
+      <h2 text-wrap>{{item?.item_name}}</h2>
+       <p text-wrap>{{item?.quantity}} {{item?.unit}}</p>
+       <p text-wrap>{{item?.category}}</p>
+        <p clear item-right>&#8377;{{item?.price}}</p>        
+    
+    </ion-item>   
+  </ion-item-sliding>
+</ion-list><br />
+<span *ngIf="itemsLists?.length <= 0" style="font-size:medium">No Items have been added by you yet.</span>
+<span *ngIf="itemsLists?.length != 0" style="font-size:medium">TOTAL AMOUNT SPENT<h2 style="float:right">&#8377;{{total}}</h2></span> 
+</ion-content>

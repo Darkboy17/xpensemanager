@@ -1,0 +1,58 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>
+     X-Pense Manager
+    </ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+  <h2>Item Details</h2> 
+  <form [formGroup]="itemForm" (submit)="createItem(item_name, category, quantity, price, unit, itemDate)" (change)="toggleSave()">
+      <ion-item text-wrap>
+    <ion-label color="primary" stacked>Item Name</ion-label>
+    <ion-input type="text" placeholder="What's the name of the item?" formControlName="itemname" [(ngModel)]="item_name" [class.invalid]="!itemForm.controls.itemname.valid && itemForm.controls.itemname.dirty"></ion-input>
+  </ion-item>
+
+  <ion-item class="error-message" 
+      *ngIf="!itemForm.controls.itemname.valid  && itemForm.controls.itemname.dirty">
+      <p text-wrap>Item Name needs to be at least 2 characters in length.</p>
+    </ion-item>
+
+  <ion-item>
+    <ion-label>Select Quantity</ion-label>
+    <ion-select formControlName="qty" multiple="false"  [(ngModel)]="quantity">
+      <ion-option *ngFor="let qty_set of quantity_settings" value="{{qty_set}}">{{qty_set}}</ion-option>  
+    </ion-select>
+</ion-item>
+
+  
+<ion-item>
+    <ion-label>Select Unit</ion-label>
+    <ion-select formControlName="unit" multiple="false"  [(ngModel)]="unit">
+      <ion-option *ngFor="let unit of units" value="{{unit.name}}">{{unit.name}}</ion-option>  
+    </ion-select>
+</ion-item>
+
+<ion-item>
+    <ion-label>Select Category</ion-label>
+    <ion-select formControlName="category" multiple="false"  [(ngModel)]="category">
+      <ion-option *ngFor="let cat of categ" value="{{cat.name}}">{{cat.name}}</ion-option>      
+    </ion-select>
+</ion-item>
+
+<ion-item>
+    <ion-label color="primary" stacked>Price</ion-label>
+    <ion-input placeholder="What's the cost of the item?" formControlName="price" [(ngModel)]="price" type="number"></ion-input>
+  </ion-item>
+
+  <ion-item>
+    <ion-label color="primary" stacked>Date Bought</ion-label>
+    <ion-datetime displayFormat="D MMM, YY" pickerFormat="DD MMM YYYY" formControlName="date" [(ngModel)]="itemDate"></ion-datetime>
+  </ion-item>
+<br />
+ <button ion-button block type="submit" [disabled]="!itemForm.valid">Save item</button>
+
+  </form>
+  
+</ion-content>
