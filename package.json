@@ -21,7 +21,7 @@
     "@angular/platform-server": "2.4.8",
     "@ionic-native/core": "3.6.0",
     "@ionic-native/network": "^3.5.0",
-    "@ionic-native/splash-screen": "3.1.0",
+    "@ionic-native/splash-screen": "3.6.0",
     "@ionic-native/status-bar": "3.1.0",
     "@ionic/storage": "2.0.0",
     "@types/cordova-plugin-network-information": "0.0.3",
